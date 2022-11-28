@@ -1,49 +1,55 @@
 var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
 botaoAdicionar.addEventListener("click", (event) => {
-  event.preventDefault();
+
+  event.preventDefault(); // tirando evento de recarregar a pagina quando clica no botão
 
   var form = document.querySelector("#form-adiciona");
-  //extraindo informaçoes do paciente do form
-  var paciente = obtemPacienteDoFormulario(form);
 
-  console.log(paciente);
-
-  var pacienteTr = document.createElement("tr");
+  var paciente = obtemPacienteDoFormulario(form); //extraindo informaçoes do paciente do form
   
-  // criando td do paciente
-  var nomeTd = document.createElement("td");
-  var pesoTd = document.createElement("td");
-  var alturaTd = document.createElement("td");
-  var gorduraTd = document.createElement("td");
-  var imcTd = document.createElement("td");
+  var pacienteTr = montaTr(paciente);//criando um paciente novo atraves da function montarTr que chama um paciente novo
+  
+  var tabela = document.querySelector("#tabela-pacientes");//adicionando paciente(tr) na tabela(tbody)
+  tabela.appendChild(pacienteTr);
 
-  nomeTd.textContent = nome;
-  pesoTd.textContent = peso;
-  alturaTd.textContent = altura;
-  gorduraTd.textContent = gordura;
-  imcTd.textContent = calculaImc(peso,altura)
-
-  pacienteTr.appendChild(nomeTd);
-  pacienteTr.appendChild(pesoTd);
-  pacienteTr.appendChild(alturaTd);
-  pacienteTr.appendChild(gorduraTd);
-  pacienteTr.appendChild(imcTd);
-  //adicionando paciente na tabela 
-  var adicionarPaciente = document.querySelector("#tabela-pacientes");
-  adicionarPaciente.appendChild(pacienteTr);
-
-
+  form.reset();//funçao serve para limpar os campos do form 
+  
 });
 
+// pegando dados que é inserido no meu form transformando em um objeto com valores 
 function obtemPacienteDoFormulario(form) {
 
   var paciente = {
-  nome: form.nome.value ,
-  peso: form.peso.value ,
-  altura: form.altura.value ,
-  gordura: form.gordura.value ,
+    nome: form.nome.value,
+    peso: form.peso.value,
+    altura: form.altura.value,
+    gordura: form.gordura.value,
+    imc:calculaImc(form.peso.value, form.altura.value)
   }
-
   return paciente
+}
+
+function montaTr(paciente) {
+  
+  var pacienteTr = document.createElement("tr");// criando tag tr
+  pacienteTr.classList.add("paciente"); //adicionando uma classe quando criar essa tr dentro o html 
+  
+  //adicionando os tds dentro do meu tr
+  // criando os tds atraves da funçao montaTd e passando quais parametros em cada um 
+  pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+  pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+  pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
+  pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+  pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
+
+  return pacienteTr
+} 
+
+//funçao de criar os tds
+function montaTd(dado,classe) {
+  var td = document.createElement("td");
+  td.textContent = dado;
+  td.classList.add(classe)
+  return td;
 }
