@@ -14,7 +14,6 @@ botaoAdicionar.addEventListener("click", (event) => {
   tabela.appendChild(pacienteTr);
 
   form.reset();//funçao serve para limpar os campos do form 
-  
 });
 
 // pegando dados que é inserido no meu form transformando em um objeto com valores 
@@ -30,6 +29,7 @@ function obtemPacienteDoFormulario(form) {
   return paciente
 }
 
+//funçao cria tr e passa suas tds com seus paremetros
 function montaTr(paciente) {
   
   var pacienteTr = document.createElement("tr");// criando tag tr
@@ -53,3 +53,10 @@ function montaTd(dado,classe) {
   td.classList.add(classe)
   return td;
 }
+
+//verifica se o paciente valido 
+// function validaPaciente(paciente) {
+//   if () {
+    
+//   }
+// }
