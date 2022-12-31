@@ -9,3 +9,6 @@ tabela.addEventListener("dblclick", (event) => {
     event.target.parentNode.remove();
   }, 500);
 })
+
+
+console.log("testando git");
