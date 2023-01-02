@@ -15,6 +15,8 @@ botaoAdicionar.addEventListener("click", (event) => {
     if (erros.length > 0) {
         exibeMensagensDeErro(erros);
         return;
+    }else {
+        adicionaPacienteNaTabela(paciente);
     }
 
     var mensagensDeErro = document.querySelector("#mensagensDeErro");
@@ -29,6 +31,8 @@ function adicionaPacienteNaTabela(paciente) {
     var tabela = document.querySelector("#tabela-pacientes"); //adicionando paciente(tr) na tabela(tbody)
     tabela.appendChild(pacienteTr);
 }
+
+
 
 
 // pegando dados que é inserido no meu form transformando em um objeto com valores 
@@ -55,7 +59,6 @@ function montaTr(paciente) {
     pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
     pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
     pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
-
     return pacienteTr
 }
 
